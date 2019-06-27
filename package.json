@@ -1,21 +1,14 @@
 {
-  "name": "angular-electron-typeorm-starter",
+  "name": "farm-cattle-management",
   "version": "0.0.0",
   "main": "main.js",
-  "description": "Angular 6(+) and Electron (Typescript + SCSS + Hot Reload) for creating cross platform applications.",
-  "homepage": "https://github.com/CubikNeRubik/angular-electron-typeorm-starter",
-  "author": {
-    "name": "Vlad Haidei",
-    "email": "vlad.gaidei@gmail.com"
-  },
+  "description": "Angular 8 and Electron for a farm cattle management.",
   "keywords": [
     "angular",
-    "angular 6",
     "electron",
     "typescript",
     "typeorm",
-    "sass",
-    "scss"
+    "bootstrap"
   ],
   "scripts": {
     "build": "npm run postinstall:electron && npm run electron:tsc && ng build",
