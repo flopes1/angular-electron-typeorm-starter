@@ -1,11 +1,11 @@
-import {Component} from '@angular/core';
-import {DatabaseService} from "./data-access/database.service";
-import {User} from "./data-access/entities/user.entity";
+import { Component } from '@angular/core';
+import { DatabaseService } from './data-access/database.service';
+import { User } from './data-access/entities/user.entity';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+    styleUrls: ['./app.component.css']
 })
 export class AppComponent {
 
@@ -20,7 +20,7 @@ export class AppComponent {
         this.getUsers();
     }
 
-    getUsers(){
+    getUsers() {
         this.databaseService
             .connection
             .then(() => User.find())
@@ -29,7 +29,7 @@ export class AppComponent {
             })
     }
 
-    addUser(){
+    addUser() {
         const user = new User();
 
         user.FirstName = this.firstName;
@@ -46,7 +46,7 @@ export class AppComponent {
                 this.firstName = '';
                 this.lastName = '';
                 this.age = '';
-            })
+            });
     }
 
 }
