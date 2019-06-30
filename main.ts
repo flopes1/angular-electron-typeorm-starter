@@ -1,18 +1,23 @@
-import {app, BrowserWindow, Menu, Tray} from 'electron';
+import { app, BrowserWindow, screen } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 
-let win: BrowserWindow = null;
+let mainWindow: BrowserWindow;
 
 // detect serve mode
 const args = process.argv.slice(1);
-let serve: boolean = args.some(val => val === '--serve');
+const serve: boolean = args.some(val => val === '--serve');
 
 function createWindow() {
 
-    win = new BrowserWindow({
-        width: 800, 
-        height: 600, 
+    const electronScreen = screen;
+    const size = electronScreen.getPrimaryDisplay().workAreaSize;
+
+    mainWindow = new BrowserWindow({
+        x: 0,
+        y: 0,
+        width: size.width,
+        height: size.height,
         webPreferences: {
             nodeIntegration: true
         },
@@ -24,10 +29,12 @@ function createWindow() {
         require('electron-reload')(__dirname, {
             electron: require(`${__dirname}/node_modules/electron`)
         });
-        win.loadURL('http://localhost:4200');
+        mainWindow.loadURL('http://localhost:4200');
+        enableDevTools();
+
     } else {
         // load the dist folder from Angular
-        win.loadURL(
+        mainWindow.loadURL(
             url.format({
                 pathname: path.join(__dirname, `/dist/index.html`),
                 protocol: "file:",
@@ -35,15 +42,21 @@ function createWindow() {
                 //icon: path.join(__dirname, 'assets/icons/favicon.png')
             })
         );
+
+        mainWindow.removeMenu();
     }
 
 
-    // The following is optional and will open the DevTools:
-    win.webContents.openDevTools()
 
-    win.on('closed', () => {
-        win = null;
+
+    mainWindow.on('closed', () => {
+        mainWindow = null;
     });
+}
+
+function enableDevTools() {
+    // The following is optional and will open the DevTools:
+    mainWindow.webContents.openDevTools();
 }
 
 try {
@@ -63,8 +76,8 @@ try {
     });
 
     // initialize the app's main window
-    app.on("activate", () => {
-        if (win === null) {
+    app.on('activate', () => {
+        if (mainWindow === null) {
             createWindow();
         }
     });

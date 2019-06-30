@@ -8,12 +8,17 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import {NgModule} from '@angular/core';
+import { AppRoutingModule } from './app-routing.module';
 
 import {AppComponent} from './app.component';
+import { LoginComponent } from './components/login/login.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        LoginComponent,
+        HomeComponent
     ],
     imports: [
         BrowserModule,
@@ -24,7 +29,8 @@ import {AppComponent} from './app.component';
         MatFormFieldModule,
         MatInputModule,
         MatGridListModule,
-        MatButtonModule
+        MatButtonModule,
+        AppRoutingModule
     ],
     providers: [],
     bootstrap: [AppComponent]
